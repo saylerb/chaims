@@ -1,13 +1,14 @@
-class Artist
+class Artist < OpenStruct
 
-  attr_reader :name, :id, :created_at, :updated_at
+ # Add OpenStruct ^^^
+ #  attr_reader :name, :id, :created_at, :updated_at
 
-  def initialize(new_artist_hash)
-    @name = new_artist_hash["name"]
-    @id = new_artist_hash["id"]
-    @created_at = new_artist_hash["created_at"]
-    @updated_at = new_artist_hash["updated_at"]
-  end
+ #  def initialize(new_artist_hash)
+ #    @name = new_artist_hash["name"]
+ #    @id = new_artist_hash["id"]
+ #    @created_at = new_artist_hash["created_at"]
+ #    @updated_at = new_artist_hash["updated_at"]
+ #  end
 
   def self.service
     # memoize the artist service as a class variable
@@ -35,4 +36,8 @@ class Artist
     artist_hash = service.reate(artist_hash)
     Artist.new(artist_hash)
   end
+
+  def self.update(artist_hash)
+  end
+  
 end
