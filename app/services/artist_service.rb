@@ -1,30 +1,27 @@
 class ArtistService
-  def index
-    connection = Faraday.new("http://my-chaimz.herokuapp.com")
 
-    response  = connection.get("/api/v1/artists.json") do |conn|
-      conn.headers['Authorization'] = "Bearer 35148ad62db32ff044d6df2cd57"
-    end
-
-    JSON.parse(response.body)
+  def initialize
+    @connection = Faraday.new("http://my-chaimz.herokuapp.com")
+    @connection.headers['Authorization'] = "Bearer 35148ad62db32ff044d6df2cd57"
   end
 
-  def show(id)
-    connection = Faraday.new("http://my-chaimz.herokuapp.com")
+  def get_artists
+    response  = @connection.get("/api/v1/artists.json")
+    parse(response)
+  end
 
-    response  = connection.get("/api/v1/artists/#{id}.json") do |conn|
-      conn.headers['Authorization'] = "Bearer 35148ad62db32ff044d6df2cd57"
-    end
-
-    JSON.parse(response.body)
+  def get_artist(id)
+    response  = @connection.get("/api/v1/artists/#{id}.json")
+    parse(response)
   end
   
-  def create(artist_hash)
-    connection = Faraday.new("http://my-chaimz.herokuapp.com")
+  def post_artist(artist_hash)
+    response  = @connection.post("/api/v1/artists?name#{artist_hash['name']}")
+    parse(response)
+  end
 
-    response  = connection.post("/api/v1/artists?name#{artist_hash['name']}") do |conn|
-     conn.headers['Authorization'] = "Bearer 35148ad62db32ff044d6df2cd57"
-    end
+  def parse(response)
     JSON.parse(response.body)
   end
+
 end

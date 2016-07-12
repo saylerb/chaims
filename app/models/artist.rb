@@ -9,15 +9,21 @@ class Artist
     @updated_at = new_artist_hash["updated_at"]
   end
 
+  def self.service
+    # memoize the artist service as a class variable
+    @@service ||= ArtistService.new
+  end
+
   def self.all
-    artists_hash = ArtistService.new.index
+    artists_hash = service.get_artists
+
     artists_hash.map do |artist_hash|
       Artist.new(artist_hash)
     end
   end
 
   def self.find(id)
-    artist_hash = ArtistService.new.show(id)
+    artist_hash = service.get_artist(id)
     Artist.new(artist_hash)
   end
 
@@ -26,8 +32,7 @@ class Artist
     # What fields are requird/optional
     # What HTTP Verb
     # What endpoint?
-    artist_hash = ArtistService.new.create(artist_hash)
+    artist_hash = service.reate(artist_hash)
     Artist.new(artist_hash)
-
   end
 end
