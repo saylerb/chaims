@@ -17,11 +17,7 @@ class Artist
   end
 
   def self.find(id)
-    
-    artists_hash = ArtistService.new.index
-    result = artists_hash.find do |artist_hash|
-      artist_hash['id'] == id.to_i
-    end
-    Artist.new(result)
+    artist_hash = ArtistService.new.show(id)
+    Artist.new(artist_hash)
   end
 end
