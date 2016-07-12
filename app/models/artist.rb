@@ -20,4 +20,14 @@ class Artist
     artist_hash = ArtistService.new.show(id)
     Artist.new(artist_hash)
   end
+
+  def self.create(artist_hash)
+    # How are we going to format the data for the api
+    # What fields are requird/optional
+    # What HTTP Verb
+    # What endpoint?
+    artist_hash = ArtistService.new.create(artist_hash)
+    Artist.new(artist_hash)
+
+  end
 end

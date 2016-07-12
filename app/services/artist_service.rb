@@ -18,4 +18,13 @@ class ArtistService
 
     JSON.parse(response.body)
   end
+  
+  def create(artist_hash)
+    connection = Faraday.new("http://my-chaimz.herokuapp.com")
+
+    response  = connection.post("/api/v1/artists?name#{artist_hash['name']}") do |conn|
+     conn.headers['Authorization'] = "Bearer 35148ad62db32ff044d6df2cd57"
+    end
+    JSON.parse(response.body)
+  end
 end
