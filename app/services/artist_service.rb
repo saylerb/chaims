@@ -20,6 +20,10 @@ class ArtistService
     parse(response)
   end
 
+  def patch_artist(artist_hash)
+    response  = @connection.patch("/api/v1/artists?name#{artist_hash['name']}")
+  end
+
   def parse(response)
     JSON.parse(response.body)
   end

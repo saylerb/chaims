@@ -35,4 +35,7 @@ class Artist
     artist_hash = service.reate(artist_hash)
     Artist.new(artist_hash)
   end
+
+  def update(artist_hash)
+  end
 end
